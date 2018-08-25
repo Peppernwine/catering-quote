@@ -1,0 +1,11 @@
+composer.phar
+vendor/
+templates_c/
+.idea/
+temp/
+log/
+*.env
+*.log
+lib/
+bower_components/
+node_modules/

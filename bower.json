@@ -1,0 +1,21 @@
+{
+  "name": "catering-quote",
+  "description": "",
+  "main": "gulpfile.js",
+  "authors": [
+    "peppernwine <corporate@peppernwine.com>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "knockout": "3.4.2",
+    "knockout-mapping": "^2.4.1"
+  }
+}

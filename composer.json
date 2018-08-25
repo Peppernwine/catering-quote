@@ -1,0 +1,13 @@
+{
+    "name": "arthirajeev/catering-quote",
+    "authors": [
+        {
+            "name": "peppernwine",
+            "email": "corporate@peppernwine.com"
+        }
+    ],
+    "config": {
+        "vendor-dir": "app/vendor"
+    },
+    "require": {}
+}
