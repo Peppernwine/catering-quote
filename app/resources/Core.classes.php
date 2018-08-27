@@ -9,6 +9,12 @@
 class Core
 {
 
+    private $controllerFactory ;
+
+    public function __construct($factory) {
+        $this->controllerFactory = $factory;
+    }
+
     private function getUrl() {
         $url = [];
         if (!empty($_GET['url'])){
@@ -54,7 +60,8 @@ class Core
              $params = [];
          }
 
-         return new $controller();
+         //return new $controller();
+         return $this->controllerFactory->createController($controller);
      }
 
      public function handleRequest() {
