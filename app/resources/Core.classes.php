@@ -63,6 +63,8 @@ class Core
         $method = '';
         $params = [];
         $controllerInstance = $this->getContoller($url,  $method,$params);
-        call_user_func([$controllerInstance, $method], $params);
+
+
+        call_user_func_array([$controllerInstance, $method], $params);
     }
 }

@@ -36,7 +36,7 @@ paths.sharedVendorFiles = [];
 paths.libSCSSFiles    = ['./public/scss/fontawesome.scss'];
 
 paths.nonPublicFiles     = ['./app/**/*.*','./.htaccess','./app/**/.htaccess'];
-paths.publicHTMLFiles    = ['./public/**/*.php','./public/**/*.html','./public/**/.htaccess'];
+paths.publicHTMLFiles    = ['./public/**/+(*.php|*.html)','./public/**/.htaccess'];
 paths.publicImageFiles   = ['./public/**/images/*.*','./public/**/images/.htaccess'];
 paths.publicFontFiles    = ['./public/**/fonts/*.*','./public/**/fonts/.htaccess'];
 
@@ -156,7 +156,7 @@ gulp.task('deploy-dev-test:copy', function() {
 
 
 gulp.task('deploy-dev-test:copyLiveHtml', function() {
-    var src = getNOTStylesAndScriptSrc(['./**/*.htaccess','./app/**/*.php','./app/**/*.html','./public/**/*.php','./public/**/*.html','!vendor/**/*.*','!lib/**/*.*']);
+    var src = getNOTStylesAndScriptSrc(['./**/*.htaccess','./app/**/+(*.html|*.php)','./public/**/+(*.html|*.php)','!vendor/**/*.*','!lib/**/*.*']);
     return gulp.src(src,{base:"./"})
         .pipe(gulp.dest(paths.devTestDir));
 });
@@ -252,7 +252,7 @@ gulp.task('watch',['serve'],function() {
     gulp.watch(getStylesAndScriptSrc(),['deploy-dev-test:copy-styles-scripts']);
 
     //for watch to trigger adds... folders must be relative path.. cannot event begin with .(dot)
-    var otherSrc = getNOTStylesAndScriptSrc(['**/.htaccess','public/**/*.*','app/**/*.*','!./**/lib/*.*']);
+    var otherSrc = getNOTStylesAndScriptSrc(['.htaccess','public/**/.htaccess','app/**/.htaccess','public/**/*.*','app/**/*.*','!./**/lib/*.*','!.git/**/*.*']);
 
     return gulp.watch(otherSrc, function(obj){
         console.log('CHANGED');

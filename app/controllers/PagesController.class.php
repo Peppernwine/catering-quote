@@ -8,8 +8,8 @@
 
 class PagesController extends BaseController
 {
-    public function about($params) {
-        echo "about " . implode(",",$params);;
+    public function about($id) {
+        echo "about " . $id;
     }
 
     public function index() {
