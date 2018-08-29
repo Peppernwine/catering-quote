@@ -260,8 +260,8 @@ gulp.task('watch',['serve'],function() {
             console.log('CHANGED or ADDED:' + obj.path);
             gulp.src( obj.path, { "base": "./"})
                 .pipe(debug())
-                .pipe(gulp.dest(paths.devTestDir));
-            bSync.reload();
+                .pipe(gulp.dest(paths.devTestDir))
+                .on('end',bSync.reload);
         }
     });
 });
