@@ -259,7 +259,7 @@ gulp.task('watch',['serve'],function() {
         if( obj.type === 'changed' || obj.type === 'added') {
             console.log('CHANGED or ADDED:' + obj.path);
             gulp.src( obj.path, { "base": "./"})
-                //.pipe(debug())
+                .pipe(debug())
                 .pipe(gulp.dest(paths.devTestDir))
                 .on('end',bSync.reload);
         }
