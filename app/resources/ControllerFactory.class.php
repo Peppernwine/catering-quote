@@ -2,13 +2,22 @@
 /**
  * Created by PhpStorm.
  * User: arthirajeev
- * Date: 8/27/2018
- * Time: 9:37 AM
+ * Date: 8/28/2018
+ * Time: 9:52 AM
  */
 
-class ControllerAbstractFactory
+class ControllerFactory
 {
+
+
     public function createController($name) {
-        
+        $name =  $name . 'Controller';
+        $controllerFileName = "../app/controllers/".$name.".class.php";
+
+        if (file_exists($controllerFileName)) {
+            require_once $controllerFileName;
+            return new $name();
+        } else
+            return null;
     }
 }

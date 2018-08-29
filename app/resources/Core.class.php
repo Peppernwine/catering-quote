@@ -26,7 +26,7 @@ class Core
     }
 
      private function getContoller($url, &$method, &$params) {
-         $controller = 'PagesController';
+         $controller = 'Index';
          $method     = 'index';
          $params     = [];
 
@@ -42,26 +42,12 @@ class Core
 
          $params = array_values($url);
 
-         $controllerFileName = "../app/controllers/".$controller.".class.php";
+         $controller = $this->controllerFactory->createController($controller);
 
-         $invalidResource = true;
-         if (file_exists($controllerFileName)) {
-             require_once $controllerFileName;
-             if (method_exists($controller,$method)) {
-                 $invalidResource = false;
-             }
+         if (empty($controller) || !method_exists($controller,$method)) {
+            throw new Exception('Invalid Resource');
          }
-
-         if ($invalidResource) {
-             $controller = 'ErrorController';
-             $controllerFileName = "../app/controllers/".$controller.".class.php";
-             require_once $controllerFileName;
-             $method = 'missingResource';
-             $params = [];
-         }
-
-         //return new $controller();
-         return $this->controllerFactory->createController($controller);
+         return $controller;
      }
 
      public function handleRequest() {
@@ -70,7 +56,6 @@ class Core
         $method = '';
         $params = [];
         $controllerInstance = $this->getContoller($url,  $method,$params);
-
 
         call_user_func_array([$controllerInstance, $method], $params);
     }
