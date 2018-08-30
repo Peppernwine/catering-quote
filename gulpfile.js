@@ -17,8 +17,13 @@ var bSync = require('browser-sync').create(); // create a browser sync instance.
 
 var path = require('path');
 var zip = require('gulp-zip');
+var env = require('gulp-env');
 
 var paths = {};
+
+env({file:'build.json'});
+
+console.log(process.env.majorVersion);
 
 paths.NPMlibJSfiles = ['./node_modules/**/jquery.min.js','./node_modules/**/jquery.datetimepicker.full.min.js',
     './node_modules/**/jquery.blast.min.js','./node_modules/**/bootbox.min.js',
@@ -50,6 +55,7 @@ paths.explicitPublicLibDir = ['./public/lib/KoolPHPSuite/**/*.*'];
 
 paths.buildDir   = 'build/catering-quote';
 paths.devTestDir = '/wamp64/www/test/catering-quote';
+
 
 
 function getStylesAndScriptSrc () {
@@ -148,7 +154,7 @@ gulp.task('build:copy-images', function() {
 
 gulp.task('build:generateArtifacts', function() {
     return gulp.src(paths.buildDir)
-               .pipe(zip('catering-quote.zip'))
+               .pipe(zip('catering-quote'+ + '.zip'))
                .pipe(gulp.dest('.'))
 });
 
