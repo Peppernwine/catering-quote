@@ -1,7 +1,7 @@
 var gulp = require('gulp');
 var debug = require('gulp-debug');
 var runSequence = require('run-sequence');
-var install = require("gulp-install");
+//var install = require("gulp-install");
 var flatten = require('gulp-flatten');
 var sass = require('gulp-sass');
 var useref = require('gulp-useref');
@@ -11,7 +11,7 @@ var uglify = require('gulp-uglify');
 var minifyCSS = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var del = require('del');
-var composer = require('gulp-composer');
+//var composer = require('gulp-composer');
 var checkFilesExist = require('check-files-exist');
 var bSync = require('browser-sync').create(); // create a browser sync instance.
 
@@ -180,6 +180,7 @@ gulp.task('install-dev:copy-shared-lib', function() {
         .pipe(gulp.dest('./public/lib'));
 });
 
+
 gulp.task('install-dev:frontend', function() {
     return gulp.src(['./bower.json', './package.json'])
         .pipe(install());
@@ -189,6 +190,8 @@ gulp.task('install-dev:backend', function(done) {
     checkFilesExist('composer.json').then(function(){composer({ async: false })});
     done();
 });
+
+
 
 gulp.task('install-dev:copy-lib-js', function() {
     return gulp.src(paths.NPMlibJSfiles)
@@ -225,10 +228,17 @@ gulp.task('install-dev:clean', function() {
 })
 
 gulp.task('install-dev', function(callback) {
-    runSequence(/*'install-dev:clean', NEED TO ADD IT BACK ONCE WE CAN SPEED UP INSTALLS*/
+    runSequence('install-dev:clean',
         ['install-dev:frontend','install-dev:backend'],
         ['install-dev:copy-shared-lib','install-dev:copy-lib-js','install-dev:copy-lib-css',
          'install-dev:copy-lib-scss','install-dev:copy-lib-fonts'],
+        'install-dev:compile-sass',
+        callback);
+});
+
+gulp.task('install-build', function(callback) {
+    runSequence(['install-dev:copy-shared-lib','install-dev:copy-lib-js','install-dev:copy-lib-css',
+            'install-dev:copy-lib-scss','install-dev:copy-lib-fonts'],
         'install-dev:compile-sass',
         callback);
 });

@@ -5,7 +5,10 @@ pipeline {
             steps {
                 echo 'Building...'
                 sh 'npm install'
-                sh 'gulp install-dev'
+                sh 'bower install'
+
+                sh 'composer install'
+                sh 'gulp install-bujld'
                 sh 'gulp build'
             }
         }
