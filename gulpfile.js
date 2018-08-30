@@ -225,7 +225,7 @@ gulp.task('install-dev:clean', function() {
 })
 
 gulp.task('install-dev', function(callback) {
-    runSequence('install-dev:clean',
+    runSequence(/*'install-dev:clean', NEED TO ADD IT BACK ONCE WE CAN SPEED UP INSTALLS*/
         ['install-dev:frontend','install-dev:backend'],
         ['install-dev:copy-shared-lib','install-dev:copy-lib-js','install-dev:copy-lib-css',
          'install-dev:copy-lib-scss','install-dev:copy-lib-fonts'],
