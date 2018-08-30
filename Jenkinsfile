@@ -4,8 +4,8 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building...'
-                sh 'sudo gulp install-dev'
-                sh 'sudo gulp build'
+                sh 'gulp install-dev'
+                sh 'gulp build'
             }
         }
         stage('Test') {
