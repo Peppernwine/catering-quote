@@ -3,7 +3,10 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building for Stage..'
+                echo 'Building...'
+                sh 'npm install'
+                sh 'composer install'
+                sh 'gulp'
             }
         }
         stage('Test') {
