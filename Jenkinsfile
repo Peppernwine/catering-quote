@@ -1,7 +1,6 @@
 pipeline {
     agent any
     stages {
-    currentBuild.description = "#${BUILD_NUMBER}, branch ${BRANCH}"
         stage('Build') {
             steps {
                 echo 'Building...'
