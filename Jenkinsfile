@@ -4,9 +4,8 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building...'
-                sh 'sudo npm install'
-                sh 'composer install'
-                sh 'gulp'
+                sh 'gulp install-dev'
+                sh 'gulp build'
             }
         }
         stage('Test') {
