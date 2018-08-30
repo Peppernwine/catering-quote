@@ -8,7 +8,7 @@ pipeline {
                 sh 'bower install'
 
                 sh 'composer install'
-                sh 'gulp install-bujld'
+                sh 'gulp install-build'
                 sh 'gulp build'
             }
         }
