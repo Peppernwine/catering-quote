@@ -47,7 +47,7 @@ paths.SASSSource            = ['./public/scss/*.scss'];
 
 paths.explicitPublicLibDir = ['./public/lib/KoolPHPSuite/**/*.*'];
 
-paths.buildDir   = '/dev/build/catering-quote';
+paths.buildDir   = 'build/catering-quote';
 paths.devTestDir = '/wamp64/www/test/catering-quote';
 
 
