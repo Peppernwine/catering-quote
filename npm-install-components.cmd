@@ -2,8 +2,8 @@
 //Ensure gulp is installed as a global module on your PC ->  npm install -g gulp
 //Ensure bower is installed as a global module on your PC ->  npm install -g bower
 
-npm init
-bower init
+npm init # required first time for a new project on Dev Machine... creates the package json file
+bower init # required first time for a new project on Dev Machine... creates the package json file
 
 //install gulp locally
 npm install gulp --save-dev
