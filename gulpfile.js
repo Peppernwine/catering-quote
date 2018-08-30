@@ -16,6 +16,7 @@ var checkFilesExist = require('check-files-exist');
 var bSync = require('browser-sync').create(); // create a browser sync instance.
 
 var path = require('path');
+var zip = require('gulp-zip');
 
 var paths = {};
 
@@ -127,6 +128,14 @@ gulp.task('build:copy-non-public', function() {
         .pipe(gulp.dest(paths.buildDir));
 });
 
+gulp.task('build:copy-html',function() {
+    return copyHtml(paths.buildDir);
+});
+
+gulp.task('build:copy-styles-scripts',function() {
+    return copyStylesAndScripts(paths.buildDir);
+});
+
 gulp.task('build:copy-fonts', function() {
     return gulp.src(paths.publicFontFiles,{base:'./'})
         .pipe(gulp.dest(paths.buildDir));
@@ -137,13 +146,12 @@ gulp.task('build:copy-images', function() {
         .pipe(gulp.dest(paths.buildDir));
 });
 
-gulp.task('build:copy-html',function() {
-    return copyHtml(paths.buildDir);
+gulp.task('build:generateArtifacts', function() {
+    return gulp.src(paths.buildDir)
+               .pipe(zip('catering-quote.zip'))
+               .pipe(gulp.dest('.'))
 });
 
-gulp.task('build:copy-styles-scripts',function() {
-    return copyStylesAndScripts(paths.buildDir);
-});
 
 gulp.task('deploy-dev-test:clean', function() {
     return del.sync(paths.devTestDir,{force:true});
@@ -244,8 +252,10 @@ gulp.task('install-build', function(callback) {
 });
 
 gulp.task('build', function(callback) {
-    runSequence('install-dev:compile-sass','build:clean',['build:copy-non-public','build:copy-explicit-public-lib','build:copy-html','build:copy-styles-scripts','build:copy-images','build:copy-fonts'],
-        callback);
+    runSequence('install-dev:compile-sass','build:clean',['build:copy-non-public','build:copy-explicit-public-lib',
+                'build:copy-html','build:copy-styles-scripts','build:copy-images','build:copy-fonts'],
+                'build:generateArtifacts',
+                 callback);
 });
 
 gulp.task('serve', function(callback) {
@@ -274,6 +284,11 @@ gulp.task('watch',['serve'],function() {
                 .on('end',bSync.reload);
         }
     });
+});
+
+gulp.task('test-src',function() {
+    return gulp.src( '*')
+        .pipe(debug())
 });
 
 

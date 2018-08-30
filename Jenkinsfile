@@ -6,10 +6,10 @@ pipeline {
                 echo 'Building...'
                 sh 'npm install'
                 sh 'bower install'
-
                 sh 'composer install'
                 sh 'gulp install-build'
                 sh 'gulp build'
+                archiveArtifacts artifacts: 'build/'
             }
         }
         stage('Test') {
