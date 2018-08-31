@@ -25,7 +25,7 @@ pipeline {
                           }
 
 
-                            withEnv(["a=1,b=2"]){
+                            withEnv(["a=1","b=2"]){
 
                                 echo 'Building...'
 
