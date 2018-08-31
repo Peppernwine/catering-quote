@@ -23,6 +23,8 @@ var paths = {};
 
 env({file:'build.json'});
 
+
+
 console.log(process.env.majorVersion);
 
 paths.NPMlibJSfiles = ['./node_modules/**/jquery.min.js','./node_modules/**/jquery.datetimepicker.full.min.js',
