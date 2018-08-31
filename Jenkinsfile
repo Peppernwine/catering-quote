@@ -14,7 +14,7 @@ pipeline {
                             prop[l[0]]=l[1]
                      }
 
-                      env = [];
+                      env = []
                       for (item in prop) {
                         echo (item.key + "=" + item.value)
                         env << (item.key + "=" + item.value)
