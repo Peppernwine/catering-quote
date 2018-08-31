@@ -21,12 +21,6 @@ var env = require('gulp-env');
 
 var paths = {};
 
-env({file:'build.json'});
-
-
-
-console.log(process.env.majorVersion);
-
 paths.NPMlibJSfiles = ['./node_modules/**/jquery.min.js','./node_modules/**/jquery.datetimepicker.full.min.js',
     './node_modules/**/jquery.blast.min.js','./node_modules/**/bootbox.min.js',
     './node_modules/**/bootstrap.min.js','./node_modules/**/velocity.min.js',
