@@ -7,25 +7,16 @@ pipeline {
             steps {
 
                     script {
-                         file = readFile('build.properties')
-                         echo file
-                         prop=[:]
-                         file.eachLine { line ->
-                                echo line
-                                l = line.split("=")
-                                echo l[0]
-                                echo l[1]
-                                prop[l[0].trim()]=l[1].trim()
-                          }
 
+                         {
+                             file = readFile('build.properties')
+                             prop=[:]
+                             file.eachLine{ line ->
+                               l=line.split("=")
+                               prop[l[0]]=l[1]
+                            }
 
-                          for (item in prop) {
-                            echo (item.key + "=" + item.value)
-                            env << (item.key + "=" + item.value)
-                          }
-                           env = ["a=1","b=2"]
-
-                            withEnv(env){
+                            withEnv(['MAJOR_VERSION='+prop["MAJOR_VERSION"],'MINOR_VERSION='+prop["MINOR_VERSION"]]){
 
                                 echo 'Building...'
 
