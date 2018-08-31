@@ -19,13 +19,11 @@ pipeline {
                                     'PATCH_NUMBER='+prop["PATCH_NUMBER"],'BUILD_NUMBER='+prop["BUILD_NUMBER"]]){
 
                                 echo 'Building...'
-
-                                //sh 'npm install'
-                                //sh 'bower install'
-                                //sh 'composer install'
-                               // sh 'gulp install-build'
-                               // sh 'gulp build'
-                                sh 'env'
+                                sh 'npm install'
+                                sh 'bower install'
+                                sh 'composer install'
+                                sh 'gulp install-build'
+                                sh 'gulp build'
                                 archiveArtifacts artifacts: 'build/'
                             }
                     }
