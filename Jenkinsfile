@@ -12,13 +12,13 @@ pipeline {
                          file.eachLine{
                             line -> l=line.split("=")
                             prop[l[0]]=l[1]
-                     }
+                          }
 
-                      env = []
-                      for (item in prop) {
-                        echo (item.key + "=" + item.value)
-                        env << (item.key + "=" + item.value)
-                      }
+                          env = []
+                          for (item in prop) {
+                            echo (item.key + "=" + item.value)
+                            env << (item.key + "=" + item.value)
+                          }
                     }
 
                     withEnv(env){
