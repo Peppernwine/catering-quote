@@ -16,7 +16,7 @@ pipeline {
                             }
 
                             withEnv(['MAJOR_VERSION='+prop["MAJOR_VERSION"],'MINOR_VERSION='+prop["MINOR_VERSION"],
-                                    'PATCH_NUMBER='+prop["PATCH_NUMBER"],'BUILD_NUMBER='+prop["BUILD_NUMBER"]){
+                                    'PATCH_NUMBER='+prop["PATCH_NUMBER"],'BUILD_NUMBER='+prop["BUILD_NUMBER"]]){
 
                                 echo 'Building...'
 
