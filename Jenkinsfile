@@ -13,12 +13,10 @@ pipeline {
                              file.split('\n').each {line ->
                                l=line.split("=")
                                prop[l[0]]=l[1]
-                               echo l[0]
-                               echo l[1]
                             }
 
-
-                            withEnv(['MAJOR_VERSION='+prop["MAJOR_VERSION"],'MINOR_VERSION='+prop["MINOR_VERSION"]]){
+                            withEnv(['MAJOR_VERSION='+prop["MAJOR_VERSION"],'MINOR_VERSION='+prop["MINOR_VERSION"],
+                                    'PATCH_NUMBER='+prop["PATCH_NUMBER"],'BUILD_NUMBER='+prop["BUILD_NUMBER"]){
 
                                 echo 'Building...'
 
