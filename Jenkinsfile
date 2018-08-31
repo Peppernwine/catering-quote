@@ -19,7 +19,7 @@ pipeline {
                             echo (item.key + "=" + item.value)
                             env << (item.key + "=" + item.value)
                           }
-                    }
+
 
                     withEnv(env){
 
@@ -32,6 +32,7 @@ pipeline {
                        // sh 'gulp build'
                         sh 'env'
                         archiveArtifacts artifacts: 'build/'
+                    }
                     }
             }
         }
