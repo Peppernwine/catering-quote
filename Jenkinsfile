@@ -1,19 +1,20 @@
 pipeline {
     agent any
-    stages {
-            script {
-                file = readFile('build.properties')
-                prop=[:]
-                file.eachLine{ line ->
-                  l=line.split("=")
-                  prop[l[0]]=l[1]
-                  }
+     script {
+                    file = readFile('build.properties')
+                    prop=[:]
+                    file.eachLine{ line ->
+                      l=line.split("=")
+                      prop[l[0]]=l[1]
+                      }
 
-        env = [];
-        for (name in prop) {
-            env << (name + "=" + prop[name])
-        }
-        }
+            env = [];
+            for (name in prop) {
+                env << (name + "=" + prop[name])
+            }
+            }
+    stages {
+
 
     withEnv(env){
         stage('Build') {
