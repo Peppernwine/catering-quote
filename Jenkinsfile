@@ -7,11 +7,12 @@ pipeline {
                 file.eachLine{ line ->
                   l=line.split("=")
                   prop[l[0]]=l[1]
-            }
+                  }
 
         env = [];
         for (name in prop) {
             env << (name + "=" + prop[name])
+        }
         }
 
     withEnv(env){
