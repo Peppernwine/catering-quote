@@ -1,36 +1,38 @@
 pipeline {
     agent any
-     script {
-                    file = readFile('build.properties')
-                    prop=[:]
-                    file.eachLine{ line ->
-                      l=line.split("=")
-                      prop[l[0]]=l[1]
-                      }
 
-            env = [];
-            for (name in prop) {
-                env << (name + "=" + prop[name])
-            }
-            }
     stages {
 
-
-    withEnv(env){
         stage('Build') {
             steps {
 
-                echo 'Building...'
+                    script {
+                         file = readFile('build.properties')
+                         prop=[:]
+                         file.eachLine{
+                            line -> l=line.split("=")
+                            prop[l[0]]=l[1]
+                     }
 
-                //sh 'npm install'
-                //sh 'bower install'
-                //sh 'composer install'
-               // sh 'gulp install-build'
-               // sh 'gulp build'
-                sh 'env'
-                archiveArtifacts artifacts: 'build/'
+                      env = [];
+                      for (name in prop) {
+                        env << (name + "=" + prop[name])
+                      }
+                    }
+
+                    withEnv(env){
+
+                        echo 'Building...'
+
+                        //sh 'npm install'
+                        //sh 'bower install'
+                        //sh 'composer install'
+                       // sh 'gulp install-build'
+                       // sh 'gulp build'
+                        sh 'env'
+                        archiveArtifacts artifacts: 'build/'
+                    }
             }
-        }
         }
         stage('Test') {
             steps {
