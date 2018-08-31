@@ -7,9 +7,7 @@ pipeline {
             steps {
 
                     script {
-
-                         {
-                             file = readFile('build.properties')
+                           file = readFile('build.properties')
                              prop=[:]
                              file.eachLine{ line ->
                                l=line.split("=")
