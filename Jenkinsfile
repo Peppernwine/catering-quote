@@ -16,6 +16,7 @@ pipeline {
 
                       env = [];
                       for (item in prop) {
+                        echo (item.key + "=" + item.value)
                         env << (item.key + "=" + item.value)
                       }
                     }
