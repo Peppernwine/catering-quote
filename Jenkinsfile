@@ -14,8 +14,7 @@ pipeline {
                                 l = line.split("=")
                                 echo l[0]
                                 echo l[1]
-                                prop[l[0]]=l[1]
-
+                                prop[l[0].trim()]=l[1].trim()
                           }
 
                           env = []
