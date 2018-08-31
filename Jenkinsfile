@@ -25,7 +25,7 @@ pipeline {
                           }
 
 
-                            withEnv(env){
+                            withEnv([env]){
 
                                 echo 'Building...'
 
