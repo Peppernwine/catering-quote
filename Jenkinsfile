@@ -18,14 +18,14 @@ pipeline {
                                 prop[l[0].trim()]=l[1].trim()
                           }
 
-                          env = []
+
                           for (item in prop) {
                             echo (item.key + "=" + item.value)
                             env << (item.key + "=" + item.value)
                           }
+                           env = ["a=1","b=2"]
 
-
-                            withEnv(["a=1","b=2"]){
+                            withEnv(env){
 
                                 echo 'Building...'
 
