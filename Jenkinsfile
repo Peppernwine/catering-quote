@@ -9,8 +9,9 @@ pipeline {
                     script {
                          file = readFile('build.properties')
                          prop=[:]
-                         file.eachLine{
-                            line -> l=line.split("=")
+                         file.eachLine{ line ->
+                            echo line
+                            l = line.split("=")
                             prop[l[0]]=l[1]
                           }
 
@@ -21,18 +22,18 @@ pipeline {
                           }
 
 
-                    withEnv(env){
+                            withEnv(env){
 
-                        echo 'Building...'
+                                echo 'Building...'
 
-                        //sh 'npm install'
-                        //sh 'bower install'
-                        //sh 'composer install'
-                       // sh 'gulp install-build'
-                       // sh 'gulp build'
-                        sh 'env'
-                        archiveArtifacts artifacts: 'build/'
-                    }
+                                //sh 'npm install'
+                                //sh 'bower install'
+                                //sh 'composer install'
+                               // sh 'gulp install-build'
+                               // sh 'gulp build'
+                                sh 'env'
+                                archiveArtifacts artifacts: 'build/'
+                            }
                     }
             }
         }
