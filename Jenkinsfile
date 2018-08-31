@@ -9,10 +9,12 @@ pipeline {
                     script {
                          file = readFile('build.properties')
                          prop=[:]
-                         file.eachLine{ line ->
-                            echo line
-                            l = line.split("=")
-                            prop[l[0]]=l[1]
+                         file.eachLine { line ->
+                            {
+                                echo line
+                                l = line.split("=")
+                                prop[l[0]]=l[1]
+                            }
                           }
 
                           env = []
