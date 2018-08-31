@@ -15,8 +15,8 @@ pipeline {
                      }
 
                       env = [];
-                      for (name in prop) {
-                        env << (name + "=" + prop[name])
+                      for (item in prop) {
+                        env << (item.key + "=" + item.value)
                       }
                     }
 
