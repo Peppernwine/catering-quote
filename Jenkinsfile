@@ -8,6 +8,7 @@ pipeline {
 
                     script {
                          file = readFile('build.properties')
+                         echo file
                          prop=[:]
                          file.eachLine { line ->
                                 echo line
