@@ -9,14 +9,15 @@ pipeline {
                     script {
                            file = readFile('build.properties')
                              prop=[:]
-                             file.eachLine({ line ->
+
+                             file.split('\n').each {line ->
                                l=line.split("=")
                                prop[l[0]]=l[1]
-                               echo prop[l[0]]
+                               echo l[0]
                                echo l[1]
-                            })
+                            }
 
-                            echo
+
                             withEnv(['MAJOR_VERSION='+prop["MAJOR_VERSION"],'MINOR_VERSION='+prop["MINOR_VERSION"]]){
 
                                 echo 'Building...'
