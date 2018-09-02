@@ -6,7 +6,7 @@
  * Time: 10:48 AM
  */
 
-DEFINE('ROOT_PATH',realpath(dirname(__FILE__)) + '/..');
+DEFINE('ROOT_PATH',realpath(dirname(__FILE__)) . '/..');
 DEFINE('APP_PATH',realpath(dirname(__FILE__)));
 
 DEFINE('PUBLIC_PATH',ROOT_PATH . '/public');
