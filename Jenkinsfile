@@ -4,9 +4,6 @@ pipeline {
     stages {
 
         stage('Build Docker Image') {
-            when {
-                branch 'master'
-            }
             steps {
                     script {
                         app = docker.build("rajeev74/catering-quote");
@@ -18,9 +15,7 @@ pipeline {
             }
         }
         stage('Push Docker Image') {
-            when {
-                branch 'master'
-            }
+
             steps {
                 script {
                     docker.withRegistry('https://registry.hib.docker.com','docker_hub_login');
@@ -30,9 +25,7 @@ pipeline {
             }
         }
         stage('Deploy to production') {
-               when {
-                        branch 'master'
-                    }
+            
             steps {
 
                 input "Deploy to Production?"
