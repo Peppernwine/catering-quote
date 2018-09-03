@@ -6,10 +6,11 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                     script {
-                        app = docker.build("rajeev74/catering-quote");
+                        app = docker.build("rajeev74/catering-quote")
                         app.inside {
                             sh 'echo $(curl localhost:80)'
                         }
+
 
                   }
             }
@@ -18,14 +19,14 @@ pipeline {
 
             steps {
                 script {
-                    docker.withRegistry('https://registry.hib.docker.com','docker_hub_login');
-                    app.push("${env.BUILD_NUMBER}");
-                    app.push("latest");
+                    docker.withRegistry('https://registry.hib.docker.com','docker_hub_login')
+                    app.push("${env.BUILD_NUMBER}")
+                    app.push("latest")
                 }
             }
         }
         stage('Deploy to production') {
-            
+
             steps {
 
                 input "Deploy to Production?"
