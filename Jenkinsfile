@@ -8,7 +8,7 @@ pipeline {
                     script {
                         app = docker.build("rajeev74/catering-quote")
                         app.inside {
-                            sh 'echo $(curl localhost:80)'
+                            sh 'echo $(curl localhost)'
                         }
 
 
