@@ -33,14 +33,14 @@ pipeline {
                 milestone(1)
 
                 script {
-                        sh 'ssh  -o StrictHostKeyChecking=no jenkins@52.90.227.178 docker pull rajeev74/catering-quote:${env.BUILD_NUMBER}'
+                        sh 'ssh  -o StrictHostKeyChecking=no jenkins@52.90.227.178 \"docker pull rajeev74/catering-quote:${env.BUILD_NUMBER}\"'
                         try {
-                            sh 'ssh  -o StrictHostKeyChecking=no jenkins@52.90.227.178 docker stop catering-quote'
-                            sh 'ssh  -o StrictHostKeyChecking=no jenkins@52.90.227.178 docker rm catering-quote'
+                            sh "ssh  -o StrictHostKeyChecking=no jenkins@52.90.227.178 \"docker stop catering-quote\""
+                            sh "ssh  -o StrictHostKeyChecking=no jenkins@52.90.227.178 \"docker rm catering-quote\""
                         } catch (err) {
                             echo: 'caught error : $err'
                         }
-                        sh 'ssh  -o StrictHostKeyChecking=no jenkins@52.90.227.178 docker run --restart always --name catering-quote -p:8080:80 -d rajeev74/catering-quote:${env.BUILD_NUMBER}'
+                        sh "ssh  -o StrictHostKeyChecking=no jenkins@52.90.227.178 \"docker run --restart always --name catering-quote -p:8080:80 -d rajeev74/catering-quote:${env.BUILD_NUMBER}\""
                     }
                 }
             }
