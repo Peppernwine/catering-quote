@@ -3,42 +3,58 @@ pipeline {
 
     stages {
 
-        stage('Build') {
+        stage('Build Docker Image') {
+            when {
+                branch 'master'
+            }
             steps {
-
                     script {
-                        file = readFile('build.properties')
-                        prop=[:]
-
-                        file.split('\n').each { line ->
-                            l=line.split("=")
-                            prop[l[0]]=l[1]
+                        app = docker.build("rajeev74/catering-quote");
+                        app.inside {
+                            sh 'echo $(curl localhost:80)'
                         }
 
-                        currentBuild.displayName = "catering-quote." + ${MAJOR_VERSION} + '.' + ${MINOR_VERSION}
-                                                                     + ${PATCH_NUMBER} + '.' + ${BUILD_NUMBER}
-
-                        withEnv(['MAJOR_VERSION='+prop["MAJOR_VERSION"],'MINOR_VERSION='+prop["MINOR_VERSION"],
-                                    'PATCH_NUMBER='+prop["PATCH_NUMBER"],'BUILD_NUMBER='+prop["BUILD_NUMBER"]]){
-                            echo 'Building...'
-                            sh 'npm install'
-                            sh 'bower install'
-                            sh 'composer install'
-                            sh 'gulp install-build'
-                            sh 'gulp build'
-                            archiveArtifacts artifacts: 'build/'
-                        }
+                  }
+            }
+        }
+        stage('Push Docker Image') {
+            when {
+                branch 'master'
+            }
+            steps {
+                script {
+                    docker.withRegistry('https://registry.hib.docker.com','docker_hub_login');
+                    app.push("${env.BUILD_NUMBER}");
+                    app.push("latest");
+                }
+            }
+        }
+        stage('Deploy to production') {
+               when {
+                        branch 'master'
                     }
-            }
-        }
-        stage('Test') {
             steps {
-                echo 'Testing...'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying...'
+
+                input "Deploy to Production?"
+                milestone(1)
+
+                script {
+                    sh """
+                        ssh jenkins@52.90.227.178 <<EOF
+                        docker pull rajeev74/catering-quote:${env.BUILD_NUMBER}
+                        try {
+                            docker stop catering-quote
+                            docker rm catering-quote
+
+                        } catch (err) {
+                            echo: 'caught error : $err'
+                        }
+
+                        docker run --restart always --name catering-quote -p:8080:80 -d rajeev74/catering-quote:${env.BUILD_NUMBER}
+                        EOF
+                    """.trim()
+                    }
+                }
             }
         }
     }
