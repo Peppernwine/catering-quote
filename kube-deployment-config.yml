@@ -31,6 +31,6 @@ spec:
     spec:
       containers:
       - name: catering-quote
-        image: rajeev74/catering-quote:94
+        image: rajeev74/catering-quote:latest
         ports:
         - containerPort: 80
