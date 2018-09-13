@@ -32,14 +32,13 @@ pipeline {
                 input "Deploy to Production?"
                 milestone(1)
 
-
-/*
                 kubernetesDeploy(
                     kubeconfigId: 'kubeconfig',
                     configs: 'kube-deployment-config.yml',
                     enableConfigSubstitution: true
                 )
-*/
+/*
+
                 script {
                         sh "ssh  -o StrictHostKeyChecking=no jenkins@52.90.227.178 \"docker pull rajeev74/catering-quote:${BUILD_NUMBER}\""
                         try {
@@ -51,6 +50,7 @@ pipeline {
                         sh "echo ${env.BUILD_NUMBER}"
                         sh "ssh -o StrictHostKeyChecking=no jenkins@52.90.227.178 \"docker run --restart always --name catering-quote -p:8080:80 -d rajeev74/catering-quote:${BUILD_NUMBER}\""
                     }
+*/
                 }
             }
         }
