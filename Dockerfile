@@ -1,4 +1,5 @@
 FROM php:5.6-apache AS build
+LABEL stage=build
 WORKDIR /usr/local/src/catering-quote
 RUN apt-get update && apt-get install -y --no-install-recommends git zip
 RUN curl --silent --show-error https://getcomposer.org/installer | php

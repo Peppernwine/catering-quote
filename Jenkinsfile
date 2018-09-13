@@ -22,6 +22,7 @@ pipeline {
                     app.push("${env.BUILD_NUMBER}")
                     app.push("latest")
                     }
+                    sh "docker image prune -f --filter label=stage=build"
                 }
             }
         }
@@ -37,6 +38,8 @@ pipeline {
                     configs: 'kube-deployment-config.yml',
                     enableConfigSubstitution: true
                 )
+
+
 /*
 
                 script {
