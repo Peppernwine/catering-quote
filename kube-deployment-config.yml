@@ -34,3 +34,9 @@ spec:
         image: rajeev74/catering-quote:latest
         ports:
         - containerPort: 80
+        livenessProbe:
+              httpGet:
+                path: /healthcheck
+                port: 80
+              initialDelaySeconds: 10
+              periodSeconds: 3

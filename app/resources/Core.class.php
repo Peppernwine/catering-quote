@@ -8,7 +8,6 @@
 
 class Core
 {
-
     private $controllerFactory ;
 
     public function __construct($factory) {
@@ -26,12 +25,12 @@ class Core
     }
 
      private function getContoller($url, &$method, &$params) {
-         $controller = 'Index';
-         $method     = 'index';
+         $controllerName = 'Index';
+         $method     = 'init';
          $params     = [];
 
          if (!empty($url[0])) {
-             $controller = ucfirst($url[0]) . 'Controller';
+             $controllerName = ucfirst($url[0]);
              unset($url[0]);
          }
 
@@ -42,7 +41,7 @@ class Core
 
          $params = array_values($url);
 
-         $controller = $this->controllerFactory->createController($controller);
+         $controller = $this->controllerFactory->createController($controllerName);
 
          if (empty($controller) || !method_exists($controller,$method)) {
             throw new Exception('Invalid Resource');

@@ -8,7 +8,7 @@
 
 class IndexController extends BaseController
 {
-    public function index() {
+    public function init() {
         $this->getView('index')->display(['name' => 'Rajeev']);
     }
 }
