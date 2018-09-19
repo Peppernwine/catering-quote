@@ -9,6 +9,8 @@
 class IndexController extends BaseController
 {
     public function init() {
+        $this->displayHeader();
         $this->getView('index')->display(['name' => 'Rajeev']);
+        $this->displayFooter();
     }
 }

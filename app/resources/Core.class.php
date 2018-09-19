@@ -24,7 +24,7 @@ class Core
         return $url;
     }
 
-     private function getContoller($url, &$method, &$params) {
+     private function getController($headerFunc, $footerFunc,$url, &$method, &$params) {
          $controllerName = 'Index';
          $method     = 'init';
          $params     = [];
@@ -41,7 +41,7 @@ class Core
 
          $params = array_values($url);
 
-         $controller = $this->controllerFactory->createController($controllerName);
+         $controller = $this->controllerFactory->createController($controllerName,$headerFunc, $footerFunc);
 
          if (empty($controller) || !method_exists($controller,$method)) {
             throw new Exception('Invalid Resource');
@@ -49,12 +49,12 @@ class Core
          return $controller;
      }
 
-     public function handleRequest() {
+     public function  handleRequest($headerFunc, $footerFunc) {
         $url = $this->getUrl();
 
         $method = '';
         $params = [];
-        $controllerInstance = $this->getContoller($url,  $method,$params);
+        $controllerInstance = $this->getController($headerFunc, $footerFunc,$url,  $method,$params);
 
         call_user_func_array([$controllerInstance, $method], $params);
     }

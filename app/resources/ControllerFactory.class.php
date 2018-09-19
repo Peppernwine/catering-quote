@@ -8,13 +8,13 @@
 
 class ControllerFactory
 {
-    public function createController($name) {
+    public function createController($name,$headerFunc, $footerFunc) {
         $name =  $name . 'Controller';
         $controllerFileName = "../app/controllers/".$name.".class.php";
 
         if (file_exists($controllerFileName)) {
             require_once $controllerFileName;
-            return new $name();
+            return new $name($headerFunc, $footerFunc);
         } else
             return null;
     }

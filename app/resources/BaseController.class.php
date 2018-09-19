@@ -8,6 +8,22 @@
 
 abstract class BaseController
 {
+    private $headerFunc;
+    private $footerFunc;
+
+    public function __construct($headerFunc, $footerFunc){
+        $this->headerFunc = $headerFunc;
+        $this->footerFunc = $footerFunc;
+    }
+
+    public function displayHeader() {
+        call_user_func($this->headerFunc);
+    }
+
+    public function displayFooter() {
+        call_user_func($this->footerFunc);
+    }
+
     public function getModel($modelName){
         $modelName =  ucfirst($modelName) .  'Model';
         $modelFileName = "../app/models/".$modelName.".class.php";
