@@ -25,7 +25,8 @@ ENV APACHE_RUN_GROUP www-data
 ENV APACHE_LOG_DIR /var/log/apache2
 ENV APACHE_LOCK_DIR /var/lock/apache2
 ENV APACHE_PID_FILE /var/run/apache2.pid
-ADD apache-config.conf /etc/apache2/sites-enabled/000-default.conf
-RUN a2enmod rewrite
+ADD catering-quote.conf /etc/apache2/sites-available/catering-quote.conf
+RUN sudo a2ensite catering-quote.conf
+RUN sudo a2enmod rewrite
 COPY --from=build /usr/local/src/catering-quote/build/catering-quote ./
 EXPOSE 80
