@@ -12,7 +12,6 @@ class ControllerFactory
         $name =  $name . 'Controller';
         $controllerFileName = "../app/controllers/".$name.".class.php";
 
-        echo $controllerFileName;
         if (file_exists($controllerFileName)) {
             require_once $controllerFileName;
             return new $name();
