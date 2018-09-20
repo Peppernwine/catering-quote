@@ -38,5 +38,5 @@ spec:
               httpGet:
                 path: /healthcheck
                 port: 8080
-              initialDelaySeconds: 10
-              periodSeconds: 3
+              initialDelaySeconds: 60
+              periodSeconds: 10
