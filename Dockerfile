@@ -36,6 +36,7 @@ RUN a2enmod rewrite
 
 COPY --from=build /usr/local/src/catering-quote/build/catering-quote ./
 ADD docker-startup.sh /usr/local/bin/startup.sh
+RUN chmod 744 /usr/local/bin/startup.sh
 
 EXPOSE 80
-#ENTRYPOINT ["startup.sh"]
+ENTRYPOINT ["startup.sh"]
