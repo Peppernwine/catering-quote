@@ -25,8 +25,17 @@ ENV APACHE_RUN_GROUP www-data
 ENV APACHE_LOG_DIR /var/log/apache2
 ENV APACHE_LOCK_DIR /var/lock/apache2
 ENV APACHE_PID_FILE /var/run/apache2.pid
+
 ADD catering-quote.conf /etc/apache2/sites-available/catering-quote.conf
 RUN a2ensite catering-quote.conf
+
+ADD apache-errorlog.conf /etc/apache2/conf-available/errorlog.conf
+RUN a2enconf errorlog.conf
+
 RUN a2enmod rewrite
+
 COPY --from=build /usr/local/src/catering-quote/build/catering-quote ./
+ADD docker-startup.sh /usr/local/bin/startup.sh
+
 EXPOSE 80
+ENTRYPOINT ["startup.sh"]

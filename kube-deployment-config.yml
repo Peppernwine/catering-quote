@@ -3,7 +3,7 @@ apiVersion: v1
 metadata:
   name: catering-quote-service
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: catering-quote
   ports:
@@ -20,7 +20,7 @@ metadata:
   labels:
     app: catering-quote
 spec:
-  replicas: 2
+  replicas: 4
   selector:
     matchLabels:
       app: catering-quote
@@ -30,13 +30,30 @@ spec:
         app: catering-quote
     spec:
       containers:
-      - name: catering-quote
-        image: rajeev74/catering-quote:latest
-        ports:
-        - containerPort: 80
-        livenessProbe:
-              httpGet:
-                path: /healthcheck
-                port: 8080
-              initialDelaySeconds: 60
-              periodSeconds: 10
+        - name: catering-quote
+          image: rajeev74/catering-quote:latest
+          env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+          volumeMounts:
+            - mountPath: /var/log/
+              name: log
+              subPath: docker/$(POD_NAME)
+          livenessProbe:
+            httpGet:
+              host: 127.0.0.1
+              path: /healthcheck
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 30
+          ports:
+          - containerPort: 80
+      volumes:
+        - name: log
+          hostPath:
+            # directory location on host
+            path: /var/log/
+            # this field is optional
+            type: Directory

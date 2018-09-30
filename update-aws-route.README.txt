@@ -1,0 +1,13 @@
+Follow the below steps to automatically update the AWS Route file with the new public IP address
+..every time EC2 instance is stopped and started.
+
+ 1) Create a new Tag on the EC2 instance with the DNS_NAME e.g. DNS_NAME = ws.stage.avonindiangrill.com
+ 2) Ensure the EC2 instance has appropriate rights (e.g. IAM role )
+ 3) Install AWS-CLI & JQ
+    - sudo apt install awscli
+    - sudo apt install jq
+ 4) copy update-aws-route.sh & update-aws-route.json /etc/init.d folder and setup the script for boot startup
+    - sudo mv update-aws-route.* /etc/init.d/
+    - sudo chmod 755 /etc/init.d/update-aws-route.sh
+    - sudo update-rc.d update-aws-route.sh defaults
+
