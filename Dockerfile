@@ -39,4 +39,4 @@ ADD docker-startup.sh /usr/local/bin/startup.sh
 RUN chmod 777 /usr/local/bin/startup.sh
 
 EXPOSE 80
-#ENTRYPOINT ["startup.sh"]
+CMD ["startup.sh"]
