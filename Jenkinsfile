@@ -35,7 +35,7 @@ pipeline {
 
                 kubernetesDeploy(
                     kubeconfigId: 'kubeconfigId',
-                    configs: 'kube-filebeat-deployment.yml,kube-deployment-config.yml',
+                    configs: 'kube-filebeat-deployment.yml',
                     enableConfigSubstitution: true
                 )
 
