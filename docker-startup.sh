@@ -17,4 +17,4 @@ mkdir -p /var/log/apache2/
 #ln -s /log/apache2/access.log /var/log/apache2/access.log
 #ln -s /log/apache2/error.log /var/log/apache2/error.log
 
-exec apache2-foreground
+apache2-foreground
