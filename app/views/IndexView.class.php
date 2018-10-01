@@ -10,7 +10,7 @@ class IndexView
 {
     public function display($data = []) {
 
-        echo "Welcome " . $data['name'] . " Wife & Kids";
+        echo "Welcome " . $data['name'] . " Arthi, Gaya & Gia";
     }
 
 }
