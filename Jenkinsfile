@@ -40,7 +40,7 @@ pipeline {
                 )
 
                 script {
-                    sh "ssh -o StrictHostKeyChecking=no jenkins@52.90.227.178 \"kubectl apply -f kube-filebeatrole-deployment.yml\""
+                    sh "ssh -o StrictHostKeyChecking=no jenkins@ws.stage.avonindiangrill.com \"kubectl apply -f kube-filebeatrole-deployment.yml\""
                 }
 
 /*
