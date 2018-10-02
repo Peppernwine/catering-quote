@@ -97,7 +97,7 @@ spec:
       volumes:
       - name: config
         configMap:
-          defaultMode: 0600
+          defaultMode: 511
           name: filebeat-config
       - name: log
         hostPath:
