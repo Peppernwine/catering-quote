@@ -39,8 +39,11 @@ pipeline {
                     enableConfigSubstitution: true
                 )
 
+
+                //KubernetesDeploy plugin does not handle Cluster Role so handle it with kubectl
                 script {
-                    sh "ssh -o StrictHostKeyChecking=no jenkins@ws.stage.avonindiangrill.com \"kubectl apply -f kube-filebeatrole-deployment.yml\""
+                    sh "scp -o StrictHostKeyChecking=no kube-filebeatrole-deployment.yml jenkins@ws.stage.avonindiangrill.com:~/"
+                    sh "ssh -o StrictHostKeyChecking=no jenkins@ws.stage.avonindiangrill.com \"kubectl apply -f ~/kube-filebeatrole-deployment.yml\""
                 }
 
 /*
